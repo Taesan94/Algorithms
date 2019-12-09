@@ -16,8 +16,6 @@ public class TwoNTyling {
 		
 		int result = solution(n) % 1000000007;
 		
-		System.out.println(" int max : " + Integer.MAX_VALUE);
-		
 		System.out.println(result);
 	}
 

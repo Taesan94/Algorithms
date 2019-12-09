@@ -9,7 +9,7 @@ import java.util.Queue;
 public class FucntionDevelope {
 
 	public static void main(String[] args) {
-
+ 
 		int[] progresses = {
 				93,93,93
 		};
