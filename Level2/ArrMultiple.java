@@ -48,7 +48,6 @@ public class ArrMultiple {
 					int value = 0;
 					//arr1[i][0,1,2, ... ]
 					for ( int j = 0 ; j < arr1[i].length; j++ ) {
-						
 						// * arr2[0,1,2][0]
 						// arr1[i][j] * arr2[j][?]
 						// j값은 동일하구만.
@@ -56,9 +55,7 @@ public class ArrMultiple {
 						// answer 넣어주기.
 					}
 					answer[i][k] = value;
-					
 				}
-				
 			}
 		}
 		return answer;
