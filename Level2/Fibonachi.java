@@ -20,6 +20,7 @@ public class Fibonachi {
 		 return fibonachi(n);
 	  }
 	 
+	 // 피보나치
 	 private static int fibonachi(int n ) {
 		 
 		 if( n==1 || n==2 ) return 1;
