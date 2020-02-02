@@ -1,12 +1,10 @@
 package Programmers.Level2;
 
-import java.util.Arrays;
-
 public class MakeJadenCase {
 
 	public static void main(String[] args) {
 
-		String s = "ab a ";
+		String s = " a ";
 
 		String answer = solution(s);
 
@@ -46,6 +44,22 @@ public class MakeJadenCase {
 		if(s.charAt(s.length()-1)==' ') sb.append(" ");
 		
 		return sb.toString();
+	}
+	
+	public static String solution2(String s) {
+		String answer ="" ;
+		
+		String[] sS = s.toLowerCase().split("");
+		
+		// " "인경우 true이다.
+		boolean flag = true;
+		
+		for ( String word : sS ) {
+			answer += flag ? word.toUpperCase() : word;
+			flag = word.equals(" ") ? true : false; 
+		}
+		
+		return answer;
 	}
 
 }
