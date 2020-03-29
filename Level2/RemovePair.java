@@ -10,7 +10,8 @@ public class RemovePair {
 
 		System.out.println(" result : " + result );
 	}
-
+	
+	// 시간초과 때문에 실패.. ! 
 	public static int solution(String s)
 	{
 
@@ -29,7 +30,33 @@ public class RemovePair {
 		else return 0;
 
 	}
+	
+	// for solution
+	private static String makeString(String beforeS) {
+		StringBuilder afterS = new StringBuilder();
 
+		System.out.println(" beforeS : " + beforeS);
+
+		String[] arrayS = beforeS.split("");
+
+		for ( int i = 0; i < arrayS.length-1; i++ ) {
+
+			if ( arrayS[i].equals(arrayS[i+1]) ) {
+				i++;
+			}else {
+				afterS.append(arrayS[i]);
+			}
+
+			// 마지막 비교가 끝났을때는, 마지막글자를 무조건 붙여준다.
+			if ( i == arrayS.length-2 ) {
+				afterS.append(arrayS[i+1]);
+			}	
+		}
+		System.out.println(" afterS : " + afterS );
+		return afterS.toString();
+	}
+	
+	// 최초정답 코드..
 	public static int solution2(String s)
 	{
 
@@ -68,29 +95,27 @@ public class RemovePair {
 
 		return 0;
 	}
-
-	private static String makeString(String beforeS) {
-		StringBuilder afterS = new StringBuilder();
-
-		System.out.println(" beforeS : " + beforeS);
-
-		String[] arrayS = beforeS.split("");
-
-		for ( int i = 0; i < arrayS.length-1; i++ ) {
-
-			if ( arrayS[i].equals(arrayS[i+1]) ) {
-				i++;
-			}else {
-				afterS.append(arrayS[i]);
+	
+	// 풀이보고 다시 풀어보기..
+	private static int solution3(String s) {
+		// stack에 push한다.
+		Stack<Character> stack = new Stack<Character>();
+		
+		for ( char c : s.toCharArray() ) {
+		
+			// stack이 비어있다면, 그냥 넣는다.
+			if( stack.size() == 0 ) {
+				stack.push(c);
+				// 이후부터는 앞에 글자가 동일한지 확인한다.
+			}else if( stack.peek() == c ) { // 동일하면 pop	
+				stack.pop();
+			}else {// 동일하지 않다면 push 하면 된다.
+				stack.push(c);
 			}
-
-			// 마지막 비교가 끝났을때는, 마지막글자를 무조건 붙여준다.
-			if ( i == arrayS.length-2 ) {
-				afterS.append(arrayS[i+1]);
-			}	
 		}
-		System.out.println(" afterS : " + afterS );
-		return afterS.toString();
+		
+		return stack.size() == 0 ? 1 : 0;
 	}
+
 
 }
