@@ -27,9 +27,8 @@ public class MoreSpicy {
 		//들어온 순서에 상관없이 우선순위대로 나간다.
 		PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
 
-		Arrays.sort(scoville);
+		// Arrays.sort(scoville);
 
-		// 정렬 된 최초 scoville에서 K보다 작은수만 priorityQueue에 add한다.
 		for ( int n : scoville ) {
 			pq.add(n);
 		}
