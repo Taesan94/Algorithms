@@ -21,7 +21,7 @@ public class PowerSet {
 
 		int answer = 0 ;
 		
-		System.out.println(Arrays.toString(flag));
+		System.out.println(" flag : " + Arrays.toString(flag) + " index : " + index );
 		
 		if( index == inputs.length ) {
 
