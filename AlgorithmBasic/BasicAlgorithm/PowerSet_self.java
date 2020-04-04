@@ -1,5 +1,7 @@
 package Programmers.AlgorithmBasic.BasicAlgorithm;
 
+import java.util.Arrays;
+
 public class PowerSet_self {
 
 	public static void main(String[] args) {
@@ -22,14 +24,14 @@ public class PowerSet_self {
 		
 		if(index == arr.length) {
 			
+			System.out.println(Arrays.toString(flag));
+			
 			for ( int i = 0 ; i < arr.length; i ++ ) {
 				if(flag[i]==1) {
 					System.out.print(arr[i]);
 				}
 			}
-			
 			System.out.println();
-			
 			return;
 		}
 		
