@@ -4,9 +4,10 @@ public class NormalSquare {
 
 	public static void main(String[] args) {
 		
-		long answer = solution(1,3);
+		long answer = gcd(17,54);
+		long answer2 = gcd(17,54);
 		
-		System.out.println(answer);
+		System.out.println(" answer1 : " + answer +", answer2 : " + answer2 );
 
 	}//main
 	
@@ -32,6 +33,10 @@ public class NormalSquare {
 			small = nmg;
 		}
 		return big;
+	}
+	
+	private static long gcd2( long w, long h ) {
+		return w%h == 0 ? h : gcd(h,w%h);
 	}
 
 }//class
