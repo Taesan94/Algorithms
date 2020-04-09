@@ -16,7 +16,8 @@ public class NewsClustering {
 
 		String str1 = "aaaaaaaaaaaaaaa";
 		String str2 = "abcabcabc";
-
+//		String str1 = "aa1+aa2";
+//		String str2 = "AAAA12";
 		int result = solution(str1,str2);
 
 		System.out.println(" result : " + result );
