@@ -29,6 +29,7 @@ public class Compress2 {
 		for ( int i = 0 ; i < msgArr.length; i++ ) {
 
 			if ( i == msgArr.length-1 ) result.add(msg.charAt(i)-64);
+
 			else {
 				String word = msgArr[i]+msgArr[i+1];
 
@@ -52,20 +53,14 @@ public class Compress2 {
 					// loop에서 +1되서넘어오고, for문에의해 +1됨으로 -2해줌.
 					i-=2;
 
-					if( i == msgArr.length-2){
-						if( addMsg.get(word) != null ) { // 최종 word가 사전에있다면 그 단어를 출력(add)하고 종료하면 된다.
-							result.add(addMsg.get(word));
-							break;
-						}else { // 최종 word가 없다면 put해주고 현재단어를 출력(add)한다.
-							addMsg.put(word, addIndex++);
-							result.add(addMsg.get(w));
-						}
-					}else {
+					if( i == msgArr.length-2 && addMsg.get(word) != null){
+						result.add(addMsg.get(word));
+						break;
+					}else{
 						result.add(addMsg.get(w));
 						addMsg.put(word, addIndex++);
 					}
 				}
-
 			}
 		}
 
