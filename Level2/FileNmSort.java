@@ -1,9 +1,7 @@
 package Programmers.Level2;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
 public class FileNmSort {
 
@@ -45,14 +43,10 @@ public class FileNmSort {
 					result = findNum(o1,h1)-findNum(o2,h2);
 					System.out.println(" findNum(o1) : " +  findNum(o1,h1) + " , findNum(o2 ) : " +  findNum(o2,h2));
 					
-					/* 이 조건을 넣고, 안넣고 결과가 틀렸다...
-					 * 잘 모르면 함부로 넣지말자 ㅠㅠ
-					 * 
 					// o2가 큰경우, o1이 우선순위가 높다.
-					if( result < 0 ) return -1;
+					if( result <= 0 ) return -1;
 					// o2가 작거나 같은경우, 숫자도 같을때도, 먼저들어온 o1이 먼저다.
-					else if ( result >= 0 ) return 1;
-					*/
+					else if ( result > 0 ) return 1;
 				}
 				return result;
 			}
