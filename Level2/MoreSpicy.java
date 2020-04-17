@@ -1,6 +1,5 @@
 package Programmers.Level2;
 
-import java.util.Arrays;
 import java.util.PriorityQueue;
 
 public class MoreSpicy {
@@ -51,6 +50,32 @@ public class MoreSpicy {
 		}
 		return cnt;
 	}//solution
+	
+	
+    public static int solution2(int[] scoville, int K) {
+        int answer = 0;
+        
+        PriorityQueue<Integer> pq = new PriorityQueue();
+        for ( int limit : scoville ) {
+        	pq.add(limit);
+        }
+        
+        while(pq.peek() < K && pq.size() > 1) {
+        	pq.add(pq.poll() + pq.poll()*2);
+        	answer++;
+        }
+        
+        if(!pq.isEmpty() && pq.peek() < K ) return -1;
+        
+        return answer;
+    }
+	
+	
+	
+	
+	
+	
+	
 
 
 }//class
