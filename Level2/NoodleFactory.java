@@ -7,13 +7,13 @@ public class NoodleFactory {
 
 	public static void main(String[] args) {
 
-		int stock = 3;
+		int stock =	4;
 		int[] dates = { 4,10,15 } ;
 		int[] supplies = { 20,5,10 } ;
-		int k = 1;
+		int k = 30;
 
 
-		int answer = solution( stock, dates, supplies, k);
+		int answer = solution2( stock, dates, supplies, k);
 
 		System.out.println(answer);
 
@@ -44,6 +44,26 @@ public class NoodleFactory {
 
 		}
 
+		return answer ;
+	}
+	
+	public static int solution2(int stock, int[] dates, int[] supplies, int k) {
+		int answer = 0 ;
+		
+		PriorityQueue<Integer> pq = new PriorityQueue<Integer>(Collections.reverseOrder());
+		
+		int day= stock;
+		
+		int i = 0;
+				
+		while( day < k-1 ) {
+			while ( i < dates.length && dates[i] <= day ) {
+				pq.add(supplies[i]);
+				i++;
+			}
+			day+=pq.poll();
+			answer++;
+		}
 		return answer ;
 	}
 
