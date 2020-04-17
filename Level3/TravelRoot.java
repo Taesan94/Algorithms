@@ -2,23 +2,19 @@ package Programmers.Level3;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedHashMap;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 public class TravelRoot {
-	
-	static List<String> result = new ArrayList<String>();
-	static int max = 0;
-	
+
 	public static void main(String[] args) {
 
 		String[][] tickets = {
-				// {"ICN", "JFK"}, {"HND", "IAD"}, {"JFK", "HND"} , {"IAD","ICN"} , {"ICN","JFK"}
+				//  {"ICN", "JFK"}, {"HND", "IAD"}, {"JFK", "HND"}
 				// {"ICN", "SFO"}, {"ICN", "ATL"}, {"SFO", "ATL"}, {"ATL", "ICN"}, {"ATL","SFO"}
 				// {"ICN", "COO"}, {"ICN", "BOO"}, {"COO", "ICN"}, {"BOO", "DOO"}
-				 {"ICN" ,"COO" }, {"COO" , "ICN"} , {"ICN" , "COO"},{"COO","ABC"}
-				// {"ICN","BOO" }, { "ICN", "COO" }, { "COO", "DOO" }, {"DOO", "COO"}, { "BOO", "DOO"} ,{"DOO", "BOO"}, {"BOO", "ICN" }, {"COO", "BOO"}
+				// {"ICN" ,"COO" }, {"COO" , "ICN"} , {"ICN" , "COO"},{"COO","ABC"}
+				 {"ICN","BOO" }, { "ICN", "COO" }, { "COO", "DOO" }, {"DOO", "COO"}, { "BOO", "DOO"} ,{"DOO", "BOO"}, {"BOO", "ICN" }, {"COO", "BOO"}
 		};
 
 		String[] result = solution(tickets);
@@ -26,41 +22,52 @@ public class TravelRoot {
 	}
 
 	public static String[] solution(String[][] tickets) {
-		Map<String,List<String>> m = new LinkedHashMap<String,List<String>>();
-		
-		// tickets를 Map에 넣어준다.
-		for ( String[] ticket : tickets ) {
-			String from = ticket[0];
-			String to = ticket[1];
 
-			List<String> arrivalLocs = m.getOrDefault(from, new ArrayList<String>());
-			arrivalLocs.add(to);
-			m.put(from, arrivalLocs);
+		for ( int i = 0 ; i < tickets.length; i++ ) {
+
+			boolean[] visit = new boolean[tickets.length];
+			
+			String s = tickets[i][0];
+			String e = tickets[i][1];
+			
+			// 최초 시작점이 여러개일 경우, 각 경우에 dfs를 순회하도록한다.
+			// 가능한 모든경우는 list에 add한다, 이후에 오름차순해서 가장 첫번째 대상을 가지고온다.
+			if(s.equals("ICN")) {
+				visit[i] = true ;
+				result = "ICN,";
+				dfs(tickets,visit,e,1);
+			}
+		}
+		Collections.sort(resultBox);
+		
+		return resultBox.get(0).split(",");
+	}
+
+	static List<String> resultBox = new ArrayList<String>();
+	static String result = "";
+	
+	private static void dfs(String[][] tickets, boolean[] visit, String end, int cnt) {
+	
+		result+=end+",";
+		
+		if(cnt==tickets.length) {
+			resultBox.add(result);
+			return;
 		}
 		
-		max = tickets.length+1;
-		
-		System.out.println( " befor M : " + m.toString());
-		String startKey = tickets[0][0];
-		result.add(startKey);
-		
-		dfs(m,startKey);
-
-		String[] answer = new String[result.size()];
-		
-		for ( int i = 0 ; i < result.size(); i++ ) {
-			answer[i]= result.get(i);
+		for( int i = 0 ; i < tickets.length; i++ ) {
+			
+			String s = tickets[i][0];
+			String e = tickets[i][1];
+			
+			if( s.equals(end) && !visit[i] ) {
+				visit[i] = true;
+				dfs(tickets,visit,e,cnt+1);
+				visit[i] = false;
+				result=result.substring(0,result.length()-4);
+			}
+			
 		}
-		System.out.println( " After M : " + m.toString());
-		
-		return answer;
 	}
-	
-	private static void dfs(Map<String,List<String>> m, String key ) {
-		
-		
-		
-	}
-	
 
 }
