@@ -25,39 +25,27 @@ public class WordChange {
 		if(!Arrays.asList(words).contains(target)) return 0;
 
 		// 하나만 다른 단어가 있는지 찾아야 된다.
-		Stack s = new Stack<String>();
-		s.add(begin);
+		Stack begins = new Stack<String>();
+		begins.add(begin);
 
 		int cnt = 0 ;
-		while ( !s.isEmpty() ) {
+		while ( !begins.isEmpty() ) {
 
-			String[] words2 = new String[s.size()];
-
-			int index = 0 ;
-
-			while ( !s.isEmpty()) {
-				words2[index++] = (String)s.pop();
-			}
-
-
-			for ( int k = 0 ; k < words2.length; k++ ) {
-				
-				String begin2 = words2[k];
-				
+			String begin2 = (String)begins.pop();
+			
 				for ( int i = 0 ; i < words.length; i ++ ) {
 					String word = words[i];
 					int diff = 0 ;
-					for ( int j = 0 ; j < words[i].length(); j++ ) {
+					for ( int j = 0 ; j < word.length(); j++ ) {
 						if( word.charAt(j) != begin2.charAt(j)) diff++;
 						if(diff > 1 ) break;
 					}
 
 					if(diff==1) {
 						if( target.equals(word)) return cnt+1;
-						else s.add(word);
+						else begins.add(word);
 					}
 				}
-			}
 			cnt++;
 		}
 		return 0;
