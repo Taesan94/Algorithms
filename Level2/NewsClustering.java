@@ -80,10 +80,7 @@ public class NewsClustering {
 		
 		System.out.println(" intersectionCnt : " + intersectionCnt +", unionCnt : " + unionCnt );
 
-		if ( unionCnt == 0 )
-			return 65536;
-		else if ( intersectionCnt == 0 )
-			return 0;
+		if ( intersectionCnt == 0 ) return 0;
 
 		double result = (double)intersectionCnt/(double)unionCnt;
 
