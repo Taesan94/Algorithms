@@ -43,17 +43,11 @@ public class GroupPicture {
 	static String[] originData ;
 	static int result = 0 ;
 	static Map<Character, Integer> characters = new HashMap();
-	static int cnt = 0 ;
 
 	private static void makePermutation(int[] position, boolean[] visit, int seq) {
 		
 		// 모든 번호를 할당해 준 경우.
 		if(seq==8) {
-			
-			cnt++;
-			
-			if( cnt > 10 ) return;
-			
 			for(int i=0; i<originData.length; i++) {
 				System.out.println(Arrays.toString(position));
 				String data = originData[i];

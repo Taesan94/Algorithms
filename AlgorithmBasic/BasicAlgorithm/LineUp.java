@@ -20,9 +20,7 @@ public class LineUp {
 	private static void lineUp(int[] position, boolean[] visit, int seq ) {
 		
 		if( seq == position.length) {
-			
 			cnt++;
-			
 			System.out.println("########## " + cnt+"번 째 조합 ########## ");
 			
 			for(int i=0; i < position.length; i++) {
