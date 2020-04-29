@@ -4,7 +4,7 @@ public class Sound4 {
 
 	public static void main(String[] args) {
 
-		int n = 2147483647;
+		int n = 13;
 		int result = solution(n);
 
 		System.out.println("result : " + result );
@@ -25,6 +25,7 @@ public class Sound4 {
 		if( n < Math.pow(3, plus/2) ) return 0;
 		
 		// n=3, plus=2 일 때는 만들 수 있다.
+		// 시작은 반드시 *이어야한다, 고로 n=3일 때, +는 반드시 2개가 존재해야 한다.
 		if( n==3 && plus==2 ) return 1;
 		
 		// *가 나올 수 있는 경우는, n을3으로 나눌 수 있을 때이다. 나눌 수 없다면 plus를 증가 시켜준다.
