@@ -43,6 +43,9 @@ public class ExpressN {
 				result = makeBundle(m.get(i),m.get(next),N,number,seq, fullN);
 				if(result) return seq;
 			}
+			
+			System.out.println(seq +"번째 결과 ! : " + m.toString());
+			
 			seq++;
 			fullN = fullN*10+N;
 		}
