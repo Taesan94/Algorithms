@@ -49,6 +49,9 @@ public class DansokCamera {
 		for( int i=1; i < routeList.size(); i++ ) {
 			
 			Car second = routeList.get(i);
+			
+			System.out.println("first : " + first.toString()+", second : " + second);
+			
 			// 먼저 들어온 차가 나가기 전에 다음에 들어온 차가 나갔다면 둘은 포함관계이다.
 			if( second.out < first.out ) {
 				// 즉, 같은 카메라에 단속 될 수 있다.
@@ -58,6 +61,8 @@ public class DansokCamera {
 			// 먼저들어온 차가 나가기전에 다음에 들어온차가 나가지않았다면 ?
 			// 먼저들어온 차가 나간 후에 다음에 들어온차가 들어왔는지를 확인해준다.
 			}else if ( second.in > first.out ) { // 먼저들어온차가 나간 후에 들어왔다면
+
+				System.out.println("[ 걸렸다 요놈 ! ] >>> first : " + first.toString()+", second : " + second);
 				// 카메라는 따로 설치해야 된다.
 				camera++;
 				first = second;
