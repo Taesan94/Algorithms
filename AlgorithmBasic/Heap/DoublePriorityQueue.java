@@ -21,6 +21,7 @@ public class DoublePriorityQueue {
 	public static int[] solution(String[] operations) {
 
 		PriorityQueue<Integer> pq = new PriorityQueue<>();
+		PriorityQueue<Integer> reverse = new PriorityQueue<>(Collections.reverseOrder());
 
 		for(String oper : operations ) {
 
@@ -29,22 +30,17 @@ public class DoublePriorityQueue {
 			String op = opers[0];
 			int value = Integer.valueOf(opers[1]);
 
-			if( op.equals("D") && !pq.isEmpty() ) {
-				if(value==1) { // 최댓값 삭제
-					PriorityQueue<Integer> reverse = new PriorityQueue<>(Collections.reverseOrder());
-					reverse.addAll(pq);
-					int remove = reverse.poll();
-					pq.remove(remove);
-				}else { // 최솟값 삭제
-					pq.poll();
-				}
-			}else if( op.equals("I") ) pq.add(value); // I 인경우.
+			if( op.equals("D") && !pq.isEmpty() && !reverse.isEmpty() ) {
+				if(value==1) pq.remove(reverse.poll()); // 최대 값 삭제
+				else reverse.remove(pq.poll()); // 최소 값 삭제
+			}else if( op.equals("I") ) {// I 인경우.
+				pq.add(value); 
+				reverse.add(value);
+			}
 		}
 
 		if( pq.isEmpty() ) return new int[] {0,0};
 		else {
-			PriorityQueue<Integer> reverse = new PriorityQueue<>(Collections.reverseOrder());
-			reverse.addAll(pq);
 			return new int[] { reverse.peek(), pq.peek() } ;
 		}
 	}	
