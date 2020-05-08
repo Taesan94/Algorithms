@@ -106,7 +106,10 @@ public class LocksAndKeys {
 			
 			for( int j=0; j< moveKeys.size(); j++ ) {
 				MapInfo key = moveKeys.get(j);
-				if( loc.check(key) ) visit = true;
+				if( loc.check(key) ) {
+					visit = true;
+					break;
+				}
 			}
 			if(!visit) return false;
 		}
