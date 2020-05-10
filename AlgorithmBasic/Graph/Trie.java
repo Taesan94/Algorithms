@@ -20,7 +20,7 @@ public class Trie {
 		System.out.println(" ABCD : " + contains("ABCD"));
 		
 		System.out.println(root.toString());
-		delete("AB");
+		delete("ABCD");
 		System.out.println(root.toString());		
 		
 		
@@ -75,16 +75,17 @@ public class Trie {
 	private static void delete(TrieNode thisNode, String word, int index) {
 
 		char c = word.charAt(index);
-		TrieNode childNode = thisNode.getChildNodes().get(c);
 		
+		// 해당 단어가 존재하지않는경우에는 에러 출력
+		if (!thisNode.getChildNodes().containsKey(c)) 
+			throw new Error("해당 문자를 찾을 수 없습니다. : [" + word + "]");
+		
+		TrieNode childNode = thisNode.getChildNodes().get(c);
 		index++;
 		
 		if(index==word.length()) {
-			// 삭제하려는 글자의 마지막글자가 없거나, LastChar가 false인 경우 에러처리.
-//			if (!childNode.getChildNodes().containsKey(c)) 
-//				throw new Error("해당 문잘There is no [" + word + "] in this Trie.");
 			if (!childNode.isLastChar()) 
-				throw new Error("There is no [" + word + "] in this Trie.");
+				throw new Error("해당 단어는 존재하는 단어가 아닙니다. : [" + word + "] ");
 			
 			childNode.setLastChar(false);
 			if (childNode.getChildNodes().isEmpty()) // 마지막 문자를 지운다.
