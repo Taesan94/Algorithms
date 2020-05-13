@@ -4,7 +4,7 @@ public class Sound4 {
 
 	public static void main(String[] args) {
 
-		int n = 13;
+		int n = 2147483647;
 		int result = solution(n);
 
 		System.out.println("result : " + result );
