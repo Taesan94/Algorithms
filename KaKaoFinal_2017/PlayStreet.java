@@ -7,12 +7,12 @@ public class PlayStreet {
 	public static void main(String[] args) {
 
 		int m=3;
-		int n=3;
+		int n=6;
 
 		int[][] cityMap ={
-				//{0, 2, 0, 0, 0, 2},{0, 0, 2, 0, 1, 0},{1, 0, 0, 2, 2, 0}
+				{0, 2, 0, 0, 0, 2},{0, 0, 2, 0, 1, 0},{1, 0, 0, 2, 2, 0}
 				// {0,0,0},{0,0,0},{0,0,0}
-				{0,0,0},{0,1,0},{0,0,0}
+				// {0,0,0},{0,1,0},{0,0,0}
 		};
 		int result = solution(m,n,cityMap);
 
@@ -58,6 +58,11 @@ public class PlayStreet {
 				
 			}
 		}
+		
+        
+        for(int[] u : down ) {
+        	System.out.println(Arrays.toString(u));
+        }
 		
 		return right[m][n];
 	}
