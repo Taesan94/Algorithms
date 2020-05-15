@@ -1,5 +1,7 @@
 package Programmers.AlgorithmBasic.DynamicProgramming;
 
+import java.util.Arrays;
+
 public class CardGame {
 
 	public static void main(String[] args) {
@@ -74,53 +76,54 @@ public class CardGame {
 		}
 		return dp[0][0];
 	}
-	
+
 	static int[] sLeft ;
 	static int[] sRight;
-	
+	private static int[][] memo; // memoization 테이블
+
 	public static int solution3(int[] left, int[] right) {
-		
-		int answer = 0 ;
-		
+
+		memo = new int[left.length][right.length];
+		for (int i = 0; i < left.length; i++) {
+			Arrays.fill(memo[i], -1);
+		}
+
 		sLeft = left;
 		sRight = right;
-		
-		answer = recursive(0,0);
-		
-		return answer ;
+		return helper(0,0);
 	}
-	
-	private static int recursive(int r, int l) {
-		
-		int answer = 0;
-		
-		if( r >= sRight.length || l >= sLeft.length ) return 0;
-		
-		int indexR = r;
-		int indexL = l;
 
-		// 카드를 2장버리거나, 왼쪽카드만 버리거나.
-		if( sRight[indexR] >= sLeft[indexL] ) {
-			
-			// 2장버리는 경우
-			int n1 = recursive(indexR+1,indexL+1);
-			
-			// 왼쪽카드만 버리는 경우
-			int n2 = recursive(indexR,indexL+1);
-			
-			answer += Math.max(n1, n2);
-			
-		}else {
-			// 오른쪽 카드를 버릴 수 있는 경우.
-			while ( indexR < sRight.length && sLeft[indexL] > sRight[indexR] ) {
-				answer+=sRight[indexR];
-				indexR++;
-			}
-			// 오른쪽 카드를 다버렸으면, 이제 왼쪽카드는 오른쪽 카드보다 작거나, 같은경우가 됬을 것이다.
-			answer += recursive(indexR,indexL);
+	public static int helper(int leftInd, int rightInd) {
+
+
+		if (sLeft.length == leftInd || sRight.length == rightInd) {
+			return 0;
 		}
-		return answer;
+		if (memo[leftInd][rightInd] != -1) {
+			System.out.println(leftInd + ", " + rightInd +"는 이미 구했당께요 ");
+			//이미 최적값을 찾은 상태
+			return memo[leftInd][rightInd];
+		} 
+		if (sRight[rightInd] < sLeft[leftInd]) {
+			// 오른쪽 카드가 더 작다면 오른쪽 카드를 버리고 더해준다
+			int currAns = helper(leftInd, rightInd+1) + sRight[rightInd];
+
+			// 계산한 값을 memoization 테이블에 저장
+			memo[leftInd][rightInd] = currAns;
+			System.out.println( " Left : " + leftInd +", Right : " + rightInd + ", # currAns : " + currAns);
+			return currAns;
+		}
+		else {
+			// 왼쪽카드만 버리거나 오른쪽카드와 왼쪽카드를 둘다 버리고 그 둘중 최적값을 계산
+			int currAns = Math.max(helper(leftInd + 1, rightInd + 1),helper(leftInd + 1, rightInd));
+
+			System.out.println( " Left : " + leftInd +", Right : " + rightInd + ", ## currAns : " + currAns);
+			// 최적값을 memoization 테이블에 저장
+			memo[leftInd][rightInd] = currAns;
+			return currAns;
+		}
 	}
-	
-	
+
+
+
 }
