@@ -17,7 +17,11 @@ public class CardGame {
 		};
 
 		int result = solution3(left,right);
-
+		
+		for( int[] m : memo ) {
+			System.out.println(Arrays.toString(m));
+		}
+		
 		System.out.println(" Result : " + result );
 
 
@@ -84,13 +88,17 @@ public class CardGame {
 	public static int solution3(int[] left, int[] right) {
 
 		memo = new int[left.length][right.length];
-		for (int i = 0; i < left.length; i++) {
-			Arrays.fill(memo[i], -1);
-		}
-
 		sLeft = left;
 		sRight = right;
-		return helper(0,0);
+		
+		for (int[] m : memo ) {
+			System.out.println(Arrays.toString(m));
+		}
+		
+		find(0,0);
+		
+		return memo[0][0];
+		
 	}
 
 	public static int helper(int leftInd, int rightInd) {
@@ -123,7 +131,20 @@ public class CardGame {
 			return currAns;
 		}
 	}
-
+	
+	public static int find(int leftInd, int rightInd) {
+		
+		if(leftInd==sLeft.length || rightInd==sRight.length) return 0;
+		
+		if( memo[leftInd][rightInd] > 0 ) return memo[leftInd][rightInd];
+		
+		if ( sRight[rightInd] < sLeft[leftInd] )
+			memo[leftInd][rightInd] = find(leftInd,rightInd+1) + sRight[rightInd];
+		else
+			memo[leftInd][rightInd] = Math.max(find(leftInd+1,rightInd+1),find(leftInd+1,rightInd));
+		
+		return memo[leftInd][rightInd];
+	}
 
 
 }
