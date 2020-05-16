@@ -3,17 +3,21 @@ package Programmers.AlgorithmBasic.DynamicProgramming;
 import java.util.Arrays;
 
 public class CardGame {
-
+	
+	static int[] sLeft ;
+	static int[] sRight;
+	private static int[][] memo; // memoization 테이블
+	
 	public static void main(String[] args) {
 
 		int[] left = {
-				1,1,1,1,3
-				//3,2,5
+				//1,1,1,1,3
+				3,2,5
 		};
 
 		int[] right = {
-				2,3,1,1,1
-				//2,4,1
+				//2,3,1,1,1
+				2,4,1
 		};
 
 		int result = solution3(left,right);
@@ -81,9 +85,6 @@ public class CardGame {
 		return dp[0][0];
 	}
 
-	static int[] sLeft ;
-	static int[] sRight;
-	private static int[][] memo; // memoization 테이블
 
 	public static int solution3(int[] left, int[] right) {
 
@@ -91,60 +92,38 @@ public class CardGame {
 		sLeft = left;
 		sRight = right;
 		
-		for (int[] m : memo ) {
-			System.out.println(Arrays.toString(m));
-		}
-		
 		find(0,0);
 		
 		return memo[0][0];
 		
 	}
-
-	public static int helper(int leftInd, int rightInd) {
-
-
-		if (sLeft.length == leftInd || sRight.length == rightInd) {
-			return 0;
-		}
-		if (memo[leftInd][rightInd] != -1) {
-			System.out.println(leftInd + ", " + rightInd +"는 이미 구했당께요 ");
-			//이미 최적값을 찾은 상태
-			return memo[leftInd][rightInd];
-		} 
-		if (sRight[rightInd] < sLeft[leftInd]) {
-			// 오른쪽 카드가 더 작다면 오른쪽 카드를 버리고 더해준다
-			int currAns = helper(leftInd, rightInd+1) + sRight[rightInd];
-
-			// 계산한 값을 memoization 테이블에 저장
-			memo[leftInd][rightInd] = currAns;
-			System.out.println( " Left : " + leftInd +", Right : " + rightInd + ", # currAns : " + currAns);
-			return currAns;
-		}
-		else {
-			// 왼쪽카드만 버리거나 오른쪽카드와 왼쪽카드를 둘다 버리고 그 둘중 최적값을 계산
-			int currAns = Math.max(helper(leftInd + 1, rightInd + 1),helper(leftInd + 1, rightInd));
-
-			System.out.println( " Left : " + leftInd +", Right : " + rightInd + ", ## currAns : " + currAns);
-			// 최적값을 memoization 테이블에 저장
-			memo[leftInd][rightInd] = currAns;
-			return currAns;
-		}
-	}
 	
+	static int seq ;
+	// memo배열에 i,j번째 카드를 선택 했을 때, 최대 값을 구한다.
+	// 즉, 가장 위의 카드 ( 0,0 ) 부터 선택했을 때의 최대 값이 답이 된다.
 	public static int find(int leftInd, int rightInd) {
 		
+		// 3,2,5
+		// 2,4,1
+		
+		// 둘중 하나의 카드를 모두 소진한 경우이다.
 		if(leftInd==sLeft.length || rightInd==sRight.length) return 0;
 		
+		// 이전에 해당 카드에 대한 답을 구했다면, 기록한 값을 사용한다.
 		if( memo[leftInd][rightInd] > 0 ) return memo[leftInd][rightInd];
 		
-		if ( sRight[rightInd] < sLeft[leftInd] )
+		// 오른쪽 카드가 작은 경우에는, 오른쪽 카드를 한장 버리고 해당 값을 더해주면 된다.
+		if ( sRight[rightInd] < sLeft[leftInd] ) {
 			memo[leftInd][rightInd] = find(leftInd,rightInd+1) + sRight[rightInd];
-		else
+		}
+		else { 
+			// 오른쪽 카드가 크거나 같은 경우에는, 카드2장을 모두버리거나, 오른쪽카드만 버리거나 할 수 있다.
+			 // 2가지 경우를 모두 확인해서, 더 큰 값을 기록해준다.
 			memo[leftInd][rightInd] = Math.max(find(leftInd+1,rightInd+1),find(leftInd+1,rightInd));
-		
+		}
+		System.out.println(seq++ +", 번 째 값 : " + "memo["+leftInd+"]["+rightInd+"] : "+memo[leftInd][rightInd]);
+		// 계산한 최적 값을 return해주어야, 재귀되면서 참조 할 수 있다.
 		return memo[leftInd][rightInd];
 	}
-
-
+	
 }
