@@ -95,7 +95,6 @@ public class CardGame {
 		find(0,0);
 		
 		return memo[0][0];
-		
 	}
 	
 	static int seq ;
