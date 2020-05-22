@@ -10,11 +10,11 @@ public class FileNmSort {
 
 		// 1. 그냥 sort하면 대문자가 먼저 정렬된다. ( ASCII코드가 앞번이라 그런 것 같다.. )
 		String[] files = {
-				// "img12.png", "img10.png", "img02.png", "img1.png", "IMG01.GIF", "img2.JPG"
+				 "img12.png", "img10.png", "img02.png", "img1.png", "IMG01.GIF", "img2.JPG"
 				// "F-5 Freedom Fighter", "B-50 Superfortress", "A-10 Thunderbolt II", "F-14 Tomcat"
 				// "F-9","F-10","F-0011","F-012","F-12","F-13","F-014"
 				//"MUZI01.zip", "muzi1.png"
-				 "F15","F13","1foo010bar020.zip"
+				// "F15","F13","1foo010bar020.zip"
 				 // a, b, c => [a b c ]
 				// "a1.zzz" , "A1.aaa"
 
