@@ -9,12 +9,14 @@ public class BridgeCross {
 
 	public static void main(String[] args) {
 
-		int bridge_length = 2 ;
+		int bridge_length = 3 ;
 
-		int weight = 10;
+		int weight = 15;
 
 		int[] truck_weights = // { 10,10,10,10,10,10,10,10,10,10 };
-		{7,4,5,6};
+		 // {7,4,5,6};
+			{ 10,5 };
+				
 
 
 		int answer = solution(bridge_length, weight , truck_weights);
