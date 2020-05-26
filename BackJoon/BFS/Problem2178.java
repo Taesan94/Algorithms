@@ -66,6 +66,7 @@ public class Problem2178 {
 				}
 			}
 		}
+		
 		System.out.println(distance[n][m]);
 		
 	}
