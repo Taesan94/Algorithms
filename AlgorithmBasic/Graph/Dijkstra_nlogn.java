@@ -21,6 +21,7 @@ public class Dijkstra_nlogn {
 	static int[] distance ;
 	static int[][] weight ;
 
+	
 	static int N ;
 	static int INF = 50001;
 
@@ -96,7 +97,7 @@ public class Dijkstra_nlogn {
 			// 모든 정점을 확인한다.
 			for( int i=1; i<N; i++) {
 				if( !visit[i] ) { // 최단거리를 구하지않은 정점을 기준으로 
-					// 1. 해당 정점과 인접한 대상으로 가는 가중치 값 + 해당 정점까지 걸린 최소거리.
+					// 1. 해당 정점과 인접한 정점으로 가는 가중치 값 + 해당 정점까지 걸린 최소거리.
 					// 2. 해당 정점의 기록된 최단거리를 비교한다.
 					if( ( weight[vertex][i] + distance[vertex] ) < distance[i] ) { // weight의 초깃 값을 INF로 채웠기 때문에, 연결 되어 있는경우에만 확인하게 된다.
 						// 최소 값을 기록해준다.
