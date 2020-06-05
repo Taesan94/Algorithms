@@ -1,4 +1,4 @@
-package Programmers.Level3;
+package Programmers.AlgorithmBasic.DynamicProgramming;
 
 import java.util.HashMap;
 import java.util.HashSet;
