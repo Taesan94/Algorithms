@@ -11,7 +11,7 @@ public class WordChange {
 		String target = "cog";
 
 		String[] words = {
-				"hot","dot","dog","lot","log"
+				"hot","dot","dog","lot","log","cog"
 		};
 
 		int result = solution(begin,target,words);
@@ -47,6 +47,7 @@ public class WordChange {
 					}
 				}
 			cnt++;
+			System.out.println(cnt+"번 째 , begins : " + begins.toString());
 		}
 		return 0;
 	}
