@@ -108,11 +108,8 @@ public class Dijkstra_nlogn {
 					}
 				}
 			}
-			
 			System.out.println( "[ " + vertex +" ] 에 인접한 정점들은 ??? : " + pq.toString());
-			
 		}
-
 	}
 	
 	// 해당 정점에 도달 할 수 있는 최단거리를 기록하기위한 클래스이다.

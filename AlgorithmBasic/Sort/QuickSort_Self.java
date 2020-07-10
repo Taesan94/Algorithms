@@ -17,9 +17,9 @@ public class QuickSort_Self {
 		
 		//분할지점을 재귀하자.
 		
-		// 좌측정렬, 원소가2개이상이어야함무조건 !
+		// 좌측정렬, 원소가2개이상이어야함무조건 ! part-1까지 포함이니 깐 !!
 		if ( start < part-1 ) quickSort( arr, start, part-1 );
-		// 우측정렬, 얘도 원소2개이상이어야 함!
+		// 우측정렬, 얘도 원소2개이상이어야 함! end까지 포함이니 깐 !!! 
 		if ( part < end ) quickSort(arr, part, end );
 		
 	}
@@ -30,13 +30,17 @@ public class QuickSort_Self {
 	private static int partition(int[] arr, int start, int end) {
 		
 		int pivot = arr[(start+end)/2];
+		System.out.println("pivot : " + pivot);
 		
 		// 같은경우도 봐야된다.
 		while ( start <= end ) {
 			while( arr[start] < pivot ) start++; // 작은값은 넘어간다. 큰값일때만 멈춘다.
 			while( arr[end] > pivot ) end--; // 큰 값은 넘어간다. 작은값일때만 멈춘다. 
 			
+			System.out.println(" start : " + start +", end : " + end );
+			
 			// 조건을 한번더 확인한다.어긋나버린경우에는 바뀌면안된다... 이거 한번더확인해보자.
+			// 같은 경우 안보면 1234567일 때, 무한루프 빠짐
 			if ( start <= end ) {
 				int temp = arr[start];
 				arr[start] = arr[end];
@@ -44,6 +48,7 @@ public class QuickSort_Self {
 				start++;
 				end--;
 			}
+			System.out.println(Arrays.toString(arr));
 		}
 		
 		return start;
@@ -59,7 +64,7 @@ public class QuickSort_Self {
 	
 	public static void main(String[] args) {
 		
-		int[] arr = { 6,5,4,1,22,3 } ;
+		int[] arr = { 10,9,8,7,6,5,4,3,2,1 } ;
 		
 		quickSort(arr,0,arr.length-1);
 

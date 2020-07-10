@@ -59,7 +59,7 @@ public class QuickSort2 {
 		 * 
 		 */
 
-		int[] arr = { 6,5,1,4,3 };
+		int[] arr = { 10,9,8,7,6,5,4,3,2,1 };
 
 		print(arr);
 
