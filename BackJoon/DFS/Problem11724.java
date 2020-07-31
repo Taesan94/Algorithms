@@ -38,6 +38,7 @@ public class Problem11724 {
 	
 	private static void show(int[][] arr) {
 		for(int i = 0 ; i < arr.length; i++) {
+			
 			System.out.println(Arrays.toString(arr[i]));
 		}
 	}
