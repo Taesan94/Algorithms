@@ -42,7 +42,6 @@ public class Problem14502 {
 
 	private static void putThreeWall(int start, int cnt) {
 
-		// System.out.println("start : " + start +", cnt : " + cnt );
 		if (cnt == 3) {
 			// 3개의 벽을 모두 세웠을 때, 안전영역의 크기를 센다.
 			int safeArea = getSafeArea();
