@@ -36,9 +36,11 @@ public class Prlboem11723 {
 					S[num_i] = 0;
 				}else if (command.equals("check")) {
 					if (exist)
-						sb.append(1 +"\n");
+						bw.write(1 +"\n");
+						//sb.append(1 +"\n");
 					else
-						sb.append(0 +"\n");
+						bw.write(0 +"\n");
+						//sb.append(0 +"\n");
 				}else if (command.equals("toggle")) {
 					if (exist)
 						S[num_i] = 0;
@@ -55,6 +57,9 @@ public class Prlboem11723 {
 				}
 			}
 		}
+		br.close();
+		bw.flush();
+		bw.close();
 		System.out.println(sb);
 	}
 }
