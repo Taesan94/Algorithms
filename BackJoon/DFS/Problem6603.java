@@ -39,8 +39,6 @@ public class Problem6603 {
 	}
 
 	private static void dfs(int start, String str) {
-		
-		
 		if (cnt == 6) {
 			sb.append(str + "\n");
 		}else {
