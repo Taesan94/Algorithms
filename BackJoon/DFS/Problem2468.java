@@ -53,16 +53,16 @@ public class Problem2468 {
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {
 				if(map[i][j] > h && visited[i][j] == 0) {
-					findSafeArea(i, j, h, visited);
+					// bfs(i, j, h, visited);
+					dfs(i, j, h, visited);
 					safeArea++;
 				}
 			}
 		}
-		System.out.println("safeArea : " + safeArea);
 		max = Math.max(max, safeArea);
 	}
 
-	private static void findSafeArea(int i, int j, int h, int[][] visited) {
+	private static void bfs(int i, int j, int h, int[][] visited) {
 
 		Queue<int[]> q = new LinkedList<>();
 		q.add(new int[] {i, j});
@@ -85,6 +85,23 @@ public class Problem2468 {
 						q.add(new int[] {nextX, nextY});
 					}
 				}
+			}
+		}
+	}
+	
+	private static void dfs(int i, int j, int h, int[][] visited) {
+		
+		if (visited[i][j] == 1 || map[i][j] <= h)
+			return;
+		
+		visited[i][j] = 1;
+		
+		for (int k = 0; k < 4; k++) {
+			int nextX = i + X[k];
+			int nextY = j + Y[k];
+
+			if (nextX >= 0 && nextY >= 0 && nextX < n && nextY < n) {
+				dfs(nextX, nextY, h, visited);
 			}
 		}
 	}
