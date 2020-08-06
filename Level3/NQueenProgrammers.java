@@ -1,6 +1,6 @@
 package Programmers.Level3;
 
-public class Problem1 {
+public class NQueenProgrammers {
 
 	public static void main(String[] args) {
 
