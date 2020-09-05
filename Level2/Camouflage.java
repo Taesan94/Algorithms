@@ -25,15 +25,14 @@ public class Camouflage {
 		for ( String[] clothe : clothes ) {
 			m.put( clothe[1], (m.getOrDefault(clothe[1], 0)+1) );
 		}
+		System.out.println(m.toString());
 		
 		int answer = 1;
 		
 		for ( int num : m.values() ) {
 			answer*=(num+1);
-		}
-		
-		answer--;
-		
+		}		
+		answer--;		
 		return answer ;
 	}
 }//class
