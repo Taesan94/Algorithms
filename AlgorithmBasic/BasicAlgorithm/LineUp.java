@@ -5,7 +5,8 @@ public class LineUp {
 	// N명의 사람이 나란히 있을 때, 만들 수 있는 조합의 수를 구한다.
 
 	static String[] peoples = {
-		"A", "E", "I", "O", "U"
+		//"A", "E", "I", "O", "U"
+		"1","2","3","4"
 	};
 	
 	public static void main(String[] args) {
