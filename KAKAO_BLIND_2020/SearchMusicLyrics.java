@@ -28,21 +28,24 @@ public class SearchMusicLyrics {
 		Trie[] tries = new Trie[10001];
 		
 		for ( String word : words ) {
-			if( tries[word.length()] == null ) tries[word.length()] = new Trie();
+			if( tries[word.length()] == null ) 
+				tries[word.length()] = new Trie();
+			
 			tries[word.length()].insert(word);
 		}
 		
 		
 		int index = 0 ;
 		
-		for( String query : queries ) {
+		for (String query : queries) {
 			int cnt = 0;
 			Trie trie =  tries[query.length()];
-			if(trie==null) cnt = 0;
-			else  cnt = tries[query.length()].contains(query);
+			if (trie == null)
+				cnt = 0;
+			else  
+				cnt = tries[query.length()].contains(query);
 			answer[index++] = cnt;
 		}
-
 		return answer;
 	}
 
@@ -102,9 +105,15 @@ public class SearchMusicLyrics {
 			
 			for( int i=0; i < query.length(); i++ ) {
 				char c = query.charAt(i);
-				if( c=='?') break;
+				
+				if(c == '?') 
+					break;
+				
 				TrieNode node = thisNode.getChildNodes().get(c);
-				if( node == null ) return 0;
+				
+				if(node == null)
+					return 0;
+				
 				thisNode = node ;
 			}
 			
