@@ -1,137 +1,146 @@
 package Programmers.KAKAO_BLIND_2019;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Stack;
 
 public class MatchingScore {
 
 	public static void main(String[] args) {
 
-		String word = "Muzi";
+		String word = "blind";
 
 		String[] pages = {
-				"<html lang=\"ko\" xml:lang=\"ko\" xmlns=\"http://www.w3.org/1999/xhtml\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta property=\"og:url\" content=\"https://careers.kakao.com/interview/list\"/>\n</head>  \n<body>\n<a href=\"https://programmers.co.kr/learn/courses/4673\"></a>#!MuziMuzi!)jayg07con&&\n\n</body>\n</html>", "<html lang=\"ko\" xml:lang=\"ko\" xmlns=\"http://www.w3.org/1999/xhtml\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta property=\"og:url\" content=\"https://www.kakaocorp.com\"/>\n</head>  \n<body>\ncon%\tmuzI92apeach&2<a href=\"https://hashcode.co.kr/tos\"></a>\n\n\t^\n</body>\n</html>"
+				"<html lang=\"ko\" xml:lang=\"ko\" xmlns=\"http://www.w3.org/1999/xhtml\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta property=\"og:url\" content=\"https://a.com\"/>\n</head>  \n<body>\nBlind Lorem Blind ipsum dolor Blind test sit amet, consectetur adipiscing elit. \n<a href=\"https://b.com\"> Link to b </a>\n</body>\n</html>", "<html lang=\"ko\" xml:lang=\"ko\" xmlns=\"http://www.w3.org/1999/xhtml\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta property=\"og:url\" content=\"https://b.com\"/>\n</head>  \n<body>\nSuspendisse potenti. Vivamus venenatis tellus non turpis bibendum, \n<a href=\"https://a.com\"> Link to a </a>\nblind sed congue urna varius. Suspendisse feugiat nisl ligula, quis malesuada felis hendrerit ut.\n<a href=\"https://c.com\"> Link to c </a>\n</body>\n</html>", "<html lang=\"ko\" xml:lang=\"ko\" xmlns=\"http://www.w3.org/1999/xhtml\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta property=\"og:url\" content=\"https://c.com\"/>\n</head>  \n<body>\nUt condimentum urna at felis sodales rutrum. Sed dapibus cursus diam, non interdum nulla tempor nec. Phasellus rutrum enim at orci consectetu blind\n<a href=\"https://a.com\"> Link to a </a>\n</body>\n</html>"
+
 		};
 
 		System.out.println("result : " + solution(word, pages));
 	}
+	
+	static String getMetaUrl(String page) {
+		int metaS = page.indexOf("<meta property=\"");
+		int metaE = page.indexOf("/>", metaS);
+		String meta = page.substring(metaS, metaE);
+		String url = meta.substring(meta.lastIndexOf("https://"), meta.length() -1);
+		
+		return url;
+	}
+	
+	static int getBasicCnt(String body, String word) {
+		int cnt = 0;
+		
+		StringBuilder sb = new StringBuilder("");
+		for (char c : body.toCharArray()) {
+			if (!(c >= 'a' && c <= 'z')) {
+				if (sb.toString().equals(word)) {
+					cnt++;
+				}
+				sb = new StringBuilder("");
+			} else
+				sb.append(c);
+		}
+		
+		return cnt;
+	}
+	
+	static Stack<String> getHrefs(String body){
+		
+		Stack<String> hrefs = new Stack<String>();
+		
+		int hrefS = body.indexOf("<a href=\"https://");
+		
+		
+		while (hrefS != -1) {
+			int hrefE = body.indexOf("\">", hrefS + 1);
+			String href = body.substring(hrefS, hrefE).substring(9);
+			hrefs.add(href);
+			body = body.substring(hrefE);
+			hrefS = body.indexOf("<a href=\"https://");
+		}
+		
+		return hrefs;
+	}
+	
 
 	public static int solution(String word, String[] pages) {
 		int answer = 0;
-
-		// 1. <index, scores 정보>
-		Map<String, Score> pageInfos = new HashMap<>();
-
-		// 2. <pageUrl, 이 페이지를 참조하고 있는 page url 정보.>
-		Map<String, List<String>> hrefUrlInfos = new HashMap<>();        
-
-		for(int i = 0; i < pages.length; i++) {
-
-
-			String pageUrl = "";
+		
+		Map<String, Integer> infos = new HashMap<>();
+		List<Page> list = new ArrayList<>();
+		
+		for (int i = 0; i < pages.length; i++) {
 			String page = pages[i];
-			String[] arr = page.split("https://");
-			int hrefCnt = 0;
-			int basicCnt = 0;
-			String content = page.split("<body>")[1].split("</body>")[0].toLowerCase();
-
-			word = word.toLowerCase();
-			StringBuilder sb = new StringBuilder("");
-
-			for (int k = 0; k < content.length(); k++) {
-
-				if (!(content.charAt(k) >= 'a' &&  content.charAt(k) <= 'z')) {
-					if (sb.toString().equals(word)) {
-						basicCnt++;
-					}
-					sb = new StringBuilder("");
-				}else {
-					sb.append(content.charAt(k));
-				}
-			}
-
-			for (int j = 0; j < arr.length; j++) {
-
-				if (j > 0) {
-					if (pageUrl.equals("") && arr[j - 1].contains("<meta property")) {
-						pageUrl = arr[j].split("\"")[0];
-					} else if (arr[j - 1].contains("<a href")) {
-						String forignUrl = arr[j].split("\"")[0];
-						List<String> list = hrefUrlInfos.getOrDefault(forignUrl, new ArrayList<>());
-						list.add(pageUrl);
-						hrefCnt++;
-						hrefUrlInfos.put(forignUrl, list);
-					}
-				}
-			}
-
-			System.out.println(answer++ + "의  basicCnt : " + basicCnt +", hrefCnt : " + hrefCnt);        	
-
-			// 기본 점수
-			// 외부 링크 수
-			pageInfos.put(pageUrl, new Score(i, basicCnt, hrefCnt, ((double)basicCnt / hrefCnt)));
-		}
-
-		int index = 0;
-		Score[] scores = new Score[pageInfos.size()];
-		Iterator itr= pageInfos.keySet().iterator();
-
-		while(itr.hasNext()) {
-
-			double linkScore = 0;
-			String url = (String)itr.next();
 			
-			Score score = pageInfos.get(url);
-			score.finalScore = score.basic;
-
-			if (hrefUrlInfos.get(url) != null) {
-				List<String> list = hrefUrlInfos.get(url);
-
-				for (int i = 0; i < list.size(); i++) {
-					linkScore += pageInfos.get(list.get(i)).linkScore;
-				}
-				score.finalScore += linkScore;
-			}
+			String url = getMetaUrl(page);
 			
-			scores[index++] = score;
+			String body = page.split("<body>")[1].split("</body>")[0].toLowerCase();
+			
+			// 1. word와 매치되는 것 찾기
+			int basic = getBasicCnt(body, word.toLowerCase());
+			
+			// 2. href 찾기
+			Stack<String> hrefs = getHrefs(body);
+			Page addPage = new Page(url, i, basic, hrefs);
+			infos.put(url, i);
+			list.add(addPage);
 		}
-
-
-		System.out.println("scores : " + Arrays.toString(scores));
-
-		Arrays.sort(scores, new Comparator<Score>() {
-
+		
+		for (int i = 0; i < list.size(); i++) {
+			
+			Page current = list.get(i);
+			Stack<String> hrefs = current.outers;
+			
+			while (hrefs.isEmpty()) {
+				String hrefUrl = hrefs.pop();
+				
+				if (infos.containsKey(hrefUrl)) {
+					int hrefP = infos.get(hrefUrl);
+					list.get(hrefP).finalScore += (double)current.basic / current.outerCnt;
+				}
+			}
+		}
+		
+		Collections.sort(list, new Comparator<Page>() {
 			@Override
-			public int compare(Score o1, Score o2) {
-				return o2.finalScore == o1.finalScore ? o1.index - o2.index : (int)(o2.finalScore - o1.finalScore);
+			public int compare(Page o1, Page o2) {
+				return o2.finalScore == o1.finalScore ? o1.index - o2.index : Double.compare(o2.finalScore, o1.finalScore);
 			}
 		});
-
-		return scores[0].index;
+		
+		 return list.get(0).index;
 	}
-
-	static class Score {
-
+	
+	static class Page {
+		
 		int index;
 		int basic = 0;
-		int hrefCnt = 0;
-		double linkScore = 0;
+		int outerCnt = 0;
 		double finalScore = 0;
-
-		Score(int index, int basic, int hrefCnt, double linkScore){
+		Stack<String> outers = new Stack<>();
+		String url = "";
+		
+		Page (String url, int index, int basic, Stack<String> outers){
+			this.url = url;
 			this.index = index;
+			this.finalScore = basic;
 			this.basic = basic;
-			this.hrefCnt = hrefCnt;
-			this.linkScore = linkScore;
+			this.outers = outers;
+			this.outerCnt = outers.size();
 		}
-
+		
 		public String toString() {
-			return "basic : " + basic + ", hrefCnt : " + hrefCnt +", linkScore : " + linkScore +", finalScore : " + finalScore;
+			return "index : " + index +", basic : "+ basic + ", outerCnt : " + outerCnt +", finalScore : " + finalScore +"\n";
 		}
+		
+		
+		
+		
 	}
+
 }
