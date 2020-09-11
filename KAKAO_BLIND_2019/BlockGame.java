@@ -15,10 +15,11 @@ public class BlockGame {
 				// {0, 2, 0, 0}, {1, 2, 0, 4}, {1, 2, 2, 4}, {1, 1, 4, 4}
 				// {2,2,0,0}, {1,2,0,0} , {1,2,0,0}, {1,1,0,0}
 				// {0, 0, 0, 0, 0}, {1, 0, 0, 2, 0}, {1, 2, 2, 2, 0}, {1, 1, 0, 0, 0}, {0, 0, 0, 0, 0}
-				 {0,0,3,2}, 
-				 {3,3,3,2}, 
-				 {1,0,2,2}, 
-				 {1,1,1,0}
+				 {0,1,0,0,3}, 
+				 {1,1,1,0,3}, 
+				 {0,0,0,3,3}, 
+				 {0,2,0,0,0},
+				 {2,2,2,0,0}
 		};
 		
 		System.out.println("result : " + solution(board));
@@ -122,8 +123,9 @@ public class BlockGame {
 				}
 			}
 		}
-		if (removeCnt != 0)
+		if (removeCnt != 0) {
 			gameStart();
+		}
 		
 		
 		return answer;
@@ -168,9 +170,13 @@ public class BlockGame {
 		
 		int value = 0;
 		for (int i = 0; i < 2; i++) {
-			if (two.get(i) == 3) {
-				continue;
-			} else {
+			
+			if (threeTwo && visitY[two.get(i)] == 1) {
+				value = two.get(i);
+				break;
+			}
+			
+			if (!threeTwo && visitX[two.get(i)] == 1) {
 				value = two.get(i);
 				break;
 			}
