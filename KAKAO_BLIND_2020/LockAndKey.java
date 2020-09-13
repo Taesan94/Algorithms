@@ -38,7 +38,6 @@ public class LockAndKey {
 	static List<Key> keyInfo;
 	static int[][] lockInfo; 
 	public static boolean solution(int[][] key, int[][] lock) {
-		boolean answer = true;
 
 		N = key.length;
 		M = lock.length;
@@ -50,6 +49,9 @@ public class LockAndKey {
 					lockCnt++;
 			}
 		}
+		
+		if (lockCnt == 0)
+			return true;
 
 		// 1. key를 회전
 		for (int i = 0; i < 4; i++) {
@@ -68,15 +70,16 @@ public class LockAndKey {
 			}
 		}
 
-		return answer;
+		return false;
 	}
 
 	static boolean isPossible(int x, int y) {
 
 		// list의 크기만큼 for . 시작점 지정
 		for (int i = 0; i < keyInfo.size(); i++) {
+			boolean possible = true;
 			Key start = keyInfo.get(i);
-			int cnt = lockCnt - 1;
+			int cnt = 0;
 			// 빈 공간부터, 열쇠의 1의 자리를 확인.
 			for (int j = 0; j < keyInfo.size(); j++) {
 				if (i != j) {
@@ -86,13 +89,15 @@ public class LockAndKey {
 					int nextY = next.y - start.y + y;
 
 					if (nextX >= 0 && nextX < M && nextY >= 0 && nextY < M) {
-						if (lockInfo[nextX][nextY] == 1)
-							return false;
-						cnt--;
+						if (lockInfo[nextX][nextY] == 1) {
+							possible = false;
+							break;
+						}
+						cnt++;
 					}
 				}
 			}
-			if (cnt == 0)
+			if (possible && cnt == lockCnt - 1)
 				return true;
 		}
 		return false;

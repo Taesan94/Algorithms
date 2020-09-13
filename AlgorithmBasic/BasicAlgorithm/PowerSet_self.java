@@ -35,6 +35,7 @@ public class PowerSet_self {
 			return;
 		}
 		
+		
 		// 현재요소를 포함하는경우
 		flag[index] = 1;
 		powerset(arr,flag,index+1);
@@ -42,6 +43,7 @@ public class PowerSet_self {
 		// 현재요소를 포함하지 않는경우
 		flag[index] = 0;
 		powerset(arr,flag,index+1);
+		
 	}
 
 }
