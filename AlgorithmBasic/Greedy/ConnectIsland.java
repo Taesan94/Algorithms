@@ -58,8 +58,11 @@ public class ConnectIsland {
 		from = getParent(parent,from);
 		to = getParent(parent,to);
 		
-		if( from < to ) parent[from] = to;
-		else parent[to] = from;
+		// 작은 쪽으로 합친다는 기준을 준다면.
+		if(from < to)
+			parent[to] = from;
+		
+		else parent[from] = to;
 	}
 
 	private static boolean connectCheck(int[] parent, int from, int to) {
