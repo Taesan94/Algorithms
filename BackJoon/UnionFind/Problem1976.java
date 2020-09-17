@@ -59,14 +59,11 @@ public class Problem1976 {
 		return getParent(parents[city]);
 	}
 	
-	// 1 2 3 연결 , 4 5 6 연결 된 그래프에서
-	// 3 4연결할 때, 그냥하면 1과6이 연결되있는지 확인할 수 없다.
-	// 그렇기 때문에,각 도시의 부모노드를 update해준다.
 	static void union(int from, int to) {
 		int fromP = getParent(from);
 		int toP = getParent(to);
 
-		// 기준이 없어도 정답 !
+		// 기준이 없어도 정답 ! , 그러나 그래프의 연결정보가 부정확 함
 		if (fromP < toP)
 			parents[toP] = fromP;
 		else
