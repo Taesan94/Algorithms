@@ -74,7 +74,8 @@ public class ConnectIsland {
 	}
 
 	private static int getParent(int[] parent, int edge) {
-		if(parent[edge]==edge) return edge;
+		if(parent[edge]==edge) 
+			return edge;
 		return getParent(parent, parent[edge]);
 	}
 

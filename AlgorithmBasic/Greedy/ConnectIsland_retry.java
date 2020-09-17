@@ -6,10 +6,15 @@ public class ConnectIsland_retry {
 
 	public static void main(String[] args) {
 		
-		int n = 4;
+		int n = 6; // 4;
 		
 		int[][] costs = {
-				{0,1,1},{0,2,2},{1,2,5},{1,3,1},{2,3,8}
+				{2,5,1},
+				{5,4,2},
+				{3,4,3},
+				{1,0,4},
+				{2,1,5}
+				//{0,1,1},{0,2,2},{1,2,5},{1,3,1},{2,3,8}
 		};	
 		System.out.println("result : " + solution(n, costs));
 	}
@@ -57,6 +62,8 @@ public class ConnectIsland_retry {
         	}
         }
         
+        System.out.println(Arrays.toString(parents));
+        
         return answer;
     }
     
@@ -72,8 +79,13 @@ public class ConnectIsland_retry {
     static void union(int from, int to) {    	
     	from = getParent(from);
     	to = getParent(to);
-    	// to의 부모는 from의 부모가 되어야 한다.
+    	
     	parents[to] = from;
+    	// to의 부모는 from의 부모가 되어야 한다.
+//    	if (from < to)
+//    		parents[to] = from;
+//    	else
+//    		parents[from] = to;
     }
 
 }
