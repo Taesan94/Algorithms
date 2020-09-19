@@ -16,8 +16,6 @@ public class SteppingStone {
 		
 		System.out.println("########################");
 		System.out.println(" input : * distance : " + distance+", n : " + n +", rocks : " + Arrays.toString(rocks)  );
-		System.out.println("########################");
-		
 		int result = solution(distance,rocks,n);
 		
 		System.out.println("result : " + result );
