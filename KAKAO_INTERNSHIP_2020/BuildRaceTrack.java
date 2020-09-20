@@ -62,7 +62,7 @@ public class BuildRaceTrack {
 				int nX = r.x + posX[i];
 				int nY = r.y + posY[i];
 
-				if (nX >= 0 && nX < N && nY >= 0 && nY < N && boardSt[nX][nY] == 0) {
+				if (nX >= 0 && nX < N && nY >= 0 && nY < N && boardSt[nX][nY] != 1) {
 					
 					int value2 = r.value + 100;
 
@@ -72,7 +72,6 @@ public class BuildRaceTrack {
 
 					if (boardSt[nX][nY] == 0 || value2 <= boardSt[nX][nY]) {
 						boardSt[nX][nY] = value2;
-						System.out.println("nx : " + nX + ", nY : " + nY + ", value 2 : " + value2);
 						q.add(new Root(nX, nY, i, value2));
 					}
 				}
