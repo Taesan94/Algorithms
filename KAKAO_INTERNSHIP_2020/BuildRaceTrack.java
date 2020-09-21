@@ -1,6 +1,5 @@
 package Programmers.KAKAO_INTERNSHIP_2020;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
