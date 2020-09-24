@@ -13,15 +13,6 @@ public class ModifierMax {
 		String expression = "50*6-3*2";// "100-200*300-500+20"; // 
 		System.out.println("Result : " + solution(expression));
 
-
-
-		String s = "11222333222";
-		String a = "222";
-		String b = "x";
-
-		/// System.out.println(s.replace(a, b));
-
-
 	}
 
 	static int cnt = 0;
