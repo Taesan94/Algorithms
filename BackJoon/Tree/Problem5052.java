@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class Problem5052 {
 
-	public static void main(String[] args) throws Exception{
+	public static void main2(String[] args) throws Exception{
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -54,7 +54,7 @@ public class Problem5052 {
 
 
 
-	public static void main2(String[] args) throws Exception{
+	public static void main3(String[] args) throws Exception{
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -107,6 +107,91 @@ public class Problem5052 {
 
 		}
 	}
+	
+	public static void main(String[] args) throws Exception{
+
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+		int t = Integer.valueOf(br.readLine());
+
+		for (int i = 0; i < t; i++) {
+			
+
+			Trie2 root = new Trie2();
+			boolean possible = true;
+			int n = Integer.valueOf(br.readLine());
+
+			String[] numbers = new String[n];
+
+			for (int j = 0; j < n; j++) {
+				String number = br.readLine();
+				numbers[j] = number;
+			}
+			
+			Arrays.sort(numbers);
+			
+			for (int k = 0; k < n; k++) {
+				String number = numbers[k];
+				
+				if (!insert(root, number)) {
+					possible = false;
+					break;
+				}
+				
+			}
+			
+			if(!possible)
+				System.out.println("NO");
+			else
+				System.out.println("YES");
+
+		}
+	}
+	
+	static boolean insert(Trie2 root, String number) {
+		
+		Trie2 curr = root;
+		
+		boolean exist = true;
+		
+		for (char c : number.toCharArray()) {
+			if (curr.childs[c - '0'] == null) {
+				exist = false;
+				curr.childs[c - '0'] = new Trie2();
+			}
+			
+			if (curr.isLast) {
+				exist = true;
+				break;
+			}
+			
+			curr = curr.childs[c - '0'];
+		}
+		
+		if (exist) {
+			return false;
+		}
+		
+		curr.isLast = true;
+		
+		return true;
+	}
+	
+	static class Trie2 {
+		
+		Trie2[] childs;
+		boolean isLast;
+		
+		Trie2() {
+			childs = new Trie2[10];
+			isLast = false;
+		}
+		
+		public String toString() {
+			return Arrays.toString(childs) + "is Last .. : " + isLast + "\n";
+		}
+	}
+	
 
 	static class Trie {
 
