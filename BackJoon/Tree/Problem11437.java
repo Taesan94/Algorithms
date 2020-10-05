@@ -47,7 +47,6 @@ public class Problem11437 {
 	static void setParents(int n) {
 
 		boolean[] visited = new boolean[n + 1];
-		// 1의 자식들 기록.
 		Queue<Integer> q = new LinkedList<>();
 		q.add(1);
 
