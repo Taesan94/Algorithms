@@ -4,7 +4,8 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class Problem15649 {
-
+	
+	static int start = 0;
 	static int N, M;
 	static int[] nums;
 	static boolean[] pos;
@@ -26,8 +27,6 @@ public class Problem15649 {
 		permutation(0);
 		
 	}
-	
-	static int start = 0;
 	
 	static void permutation(int idx) {
 		
