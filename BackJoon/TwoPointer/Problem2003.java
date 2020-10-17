@@ -41,9 +41,8 @@ public class Problem2003 {
 			if (value < M) {
 				e++;
 			} else {
-				if (value == M) {
+				if (value == M)
 					answer++;
-				}
 				s++;
 				e = s;
 				value = 0;
