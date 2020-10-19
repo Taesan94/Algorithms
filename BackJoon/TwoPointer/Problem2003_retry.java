@@ -31,7 +31,7 @@ public class Problem2003_retry {
 			if (s >= M) {
 				s -= nums[l++];
 			} else if (r == N)
-				break; // ??
+				break; // 마지막 s == M 조건을 한번더 보기 위해 종료조건을 여기다 포함시킨다.
 			else 
 				s += nums[r++];
 			if (s == M)
