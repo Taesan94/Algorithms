@@ -26,12 +26,13 @@ public class Problem2003_retry {
 		int r = 0;
 		int s = 0;
 
-		while (true) {
+		while (r != N) {
 
 			if (s >= M) {
 				s -= nums[l++];
-			} else if (r == N)
-				break; // 마지막 s == M 조건을 한번더 보기 위해 종료조건을 여기다 포함시킨다.
+			} 
+			else if (r == N)
+				break; // 마지막 s == M 조건을 한번더 보기 위해 종료조건을 여기다 포함시킨다. 6 13에 2 3 5 7 11 13일 때 비교...
 			else 
 				s += nums[r++];
 			if (s == M)

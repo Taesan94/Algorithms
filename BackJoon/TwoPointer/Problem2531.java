@@ -2,6 +2,7 @@ package Programmers.BackJoon.TwoPointer;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Problem2531 {
@@ -19,14 +20,38 @@ public class Problem2531 {
 
 		int[] sushis = new int[n + 1];
 
-		for (int i = 1; i <= n; i++) {
+		for (int i = 0; i < n; i++) {
 			sushis[i] = Integer.valueOf(br.readLine());
 		}
+
+		int cnt = 0;
+		int[] visited = new int[d + 1];
+
+		for (int i = 0; i < k; i++) {
+			if (visited[sushis[i]] == 0)
+				cnt++;
+			visited[sushis[i]]++;
+		}
 		
-		
+		int result = cnt;
 
+		for (int i = 1; i < n; i++) {
+			
+			if (cnt >= result) {
+				if (visited[c] == 0)
+					result = cnt + 1;
+				else
+					result = cnt;
+			}
+			
+			visited[sushis[i - 1]]--;
+			if (visited[sushis[i - 1]] == 0)
+				cnt--;
+			if (visited[sushis[(i + k - 1) % n]] == 0)
+				cnt++;
+			visited[sushis[(i + k - 1) % n]]++;
 
-
+		}
+		System.out.println(result);
 	}
-
 }
