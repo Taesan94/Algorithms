@@ -31,13 +31,6 @@ public class TimeConversion {
     	return hour +":" + minute +":"+second;
 
     }
-    
-    private String addZero(String time) {
-    	if (time.length() == 1) {
-    		time = "0" + time;
-    	}
-    	return time;
-    }
 
     private static final Scanner scan = new Scanner(System.in);
 
