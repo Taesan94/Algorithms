@@ -56,7 +56,6 @@ public class Problem4485 {
 					pq.add(new Pair(nX, nY, p.w + miro[nX][nY]));
 			}
 		}
-		
 		return -1;
 	}
 
