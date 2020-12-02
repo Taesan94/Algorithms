@@ -49,7 +49,7 @@ public class Problem10942 {
 				dp[i][i + 1] = true;
 		}
 		
-		// 3이상
+		// 3이상 시작 = 끝이면서, 시작 + 1 끝 - 1이 펠린드롬이면 가능 !
 		for (int i = 2; i < n; i++) {
 			for (int j = 1; j <= n - i; j++) {
 				if (nums[j] == nums[j + i] && dp[j + 1][j + i - 1])
