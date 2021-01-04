@@ -11,8 +11,7 @@ public class Problem14503 {
 	
 	static int N, M, Result;
 	static int[][] Map;
-	static Info Robot;
-	
+	static Info Robot;	
 
 	// 동,북,서,남
 	static int[] X = {0, -1, 0, 1};
