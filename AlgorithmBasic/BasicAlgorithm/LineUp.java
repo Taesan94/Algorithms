@@ -6,7 +6,7 @@ public class LineUp {
 
 	static String[] peoples = {
 		//"A", "E", "I", "O", "U"
-		"1","2","3","4"
+		"1","2","3","4","5","6","7","8","9","10"
 	};
 	
 	public static void main(String[] args) {
@@ -14,6 +14,7 @@ public class LineUp {
 		boolean[] visit = new boolean[peoples.length];
 		int[] position = new int[peoples.length];
 		lineUp(position,visit,0);
+		System.out.println("cnt : " + cnt);
 	}
 	
 	static int cnt = 0 ;
@@ -22,12 +23,12 @@ public class LineUp {
 		
 		if( seq == position.length) {
 			cnt++;
-			System.out.println("########## " + cnt+"번 째 조합 ########## ");
+			//System.out.println("########## " + cnt+"번 째 조합 ########## ");
 			
 			for(int i=0; i < position.length; i++) {
-				System.out.print(peoples[position[i]]+" ");
+				// System.out.print(peoples[position[i]]+" ");
 			}
-			System.out.println("");
+			// System.out.println("");
 		}
 		
 		for( int i=0; i<position.length; i++ ) {

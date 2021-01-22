@@ -83,7 +83,8 @@ public class ThanksGivingTraffic {
 				}
 			}
 			max = Math.max(cnt, max);
-			System.out.println("i : " + i +"일 때 max : " + max);
+			System.out.println("i : " + 
+			i +"일 때 max : " + max);
 		}
 		return max;
 	}

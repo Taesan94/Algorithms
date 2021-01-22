@@ -20,7 +20,7 @@ public class Trie {
 		System.out.println(" ABCD : " + contains("ABCD"));
 		
 		System.out.println(root.toString());
-		delete("ABCD");
+		//delete("ABCD");
 		System.out.println(root.toString());		
 		
 		

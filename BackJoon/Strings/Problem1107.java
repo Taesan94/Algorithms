@@ -7,6 +7,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;
 
+/*
+ * 반례모음 
+ * https://www.acmicpc.net/board/view/46120
+ * 
+ */
 public class Problem1107 {
 
 	static String n;
