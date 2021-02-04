@@ -1,4 +1,4 @@
-package Programmers.Hackerrank;
+package Hackerrank;
 
 import java.io.BufferedReader;
 import java.io.File;
