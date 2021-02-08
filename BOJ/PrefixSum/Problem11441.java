@@ -1,4 +1,4 @@
-package BOJ.Etc;
+package BOJ.PrefixSum;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
