@@ -73,7 +73,7 @@ public class Problem9663 {
 	private static void backTracking(int start, int cnt) {
 		
 		if (cnt == N) {
-			// print();
+			print();
 			result++;
 			return;
 		}
@@ -89,7 +89,7 @@ public class Problem9663 {
 					board[i][j] = 1;
 					//System.out.printf("i : %d, j : %d 일 때 cnt는 : %d 이다. 다음으로 [ %d, %d ] 좌표를 보겠다. \n", i, j, cnt, (start / N), (start % N));
 					// print();
-					backTracking(start, cnt + 1);
+					backTracking(i * N + j + 1, cnt + 1);
 					board[i][j] = 0;
 				}
 				j++;
