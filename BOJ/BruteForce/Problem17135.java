@@ -99,10 +99,7 @@ public class Problem17135 {
                 positions[i] = false;
             }
         }
-
-
     }
-
 
     static class Pair {
 
