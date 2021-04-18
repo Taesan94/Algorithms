@@ -66,7 +66,11 @@ public class AllZeroMake {
         return res + Math.abs(a[now]);
     }
 
-    static void dfs(int p, int v, boolean[] visited) {
+    /*
+        oom occured
+         because visited ..
+     */
+    static void dfs_oom(int p, int v, boolean[] visited) {
 
         if (visited[v])
             return ;
@@ -74,9 +78,27 @@ public class AllZeroMake {
 
         for (int adj : list[v]) {
             if (!visited[adj]) {
-                dfs(v, adj, visited);
+                dfs_oom(v, adj, visited);
             }
         }
+        long_a[p] += long_a[v];
+        Result += Math.abs(long_a[v]);
+    }
+
+    // static 안붙여도 실패 뜸, stack공간 차지해서 그러는것 같음.
+    static boolean[] visited;
+    static void dfs(int p, int v) {
+
+        if (visited[v])
+            return ;
+        visited[v] = true;
+
+        for (int adj : list[v]) {
+            if (!visited[adj]) {
+                dfs(v, adj);
+            }
+        }
+        // 담을 때, 자료형 주의. 최초 int[]값 변경했다가 오버 or 언더 플로우 발생 함. (test case 11번 실패)
         long_a[p] += long_a[v];
         Result += Math.abs(long_a[v]);
     }
@@ -100,10 +122,8 @@ public class AllZeroMake {
         long[] a2 = new long[a.length];
         for (int i = 0; i < a.length; i++)
             a2[i] = long_a[i];
-        dfs(0, 0, visited);
-
-        long r2 = dfs2(a2,0, 0);
-        System.out.println("dfs2 : " + r2);
+        dfs(0, 0);
+        // dfs2(0, 0);
         return (long)Result;
     }
 }
