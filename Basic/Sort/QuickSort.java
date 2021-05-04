@@ -53,7 +53,7 @@ public class QuickSort {
 		 * pivot값을 기준으로 작은값은 왼쪽,큰값은 오른쪽으로 partition을 나눠가면서 정렬하는 방법이다.
 		 * 
 		 * 평균속도 N logN
-		 * 최악속도 N^2 이다.
+		 * 최악속도 N^2 이다. => pivot값이 계속 최소, 최대값이 선택되는 경우
 		 * 
 		 */
 
