@@ -2,7 +2,6 @@ package BOJ.Mst;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
@@ -45,29 +44,12 @@ public class Problem1197 {
         PriorityQueue<Vertex> pq = new PriorityQueue<>();
 
         for (int i = 0; i < e; i++) {
-            String s = br.readLine();
-            int[] nums = new int[3];
+            st = new StringTokenizer(br.readLine());
 
-            int j = 0;
-            int seq = 0;
-            boolean neg = false;
-            int value = 0;
-            while (j < s.length()) {
-                if (s.charAt(j) == '-') {
-                    value = 0;
-                    neg = true;
-                }
-                else if (s.charAt(j) == ' ') {
-                    nums[seq++] = value;
-                    value = 0;
-                } else
-                    value = value * 10 + s.charAt(j) - '0';
-                j++;
-            }
-            if (neg)
-                value *= -1;
-            nums[2] = value;
-            pq.add(new Vertex(nums[0], nums[1], nums[2]));
+            int v1 = Integer.valueOf(st.nextToken());
+            int v2 = Integer.valueOf(st.nextToken());
+            int v3 = Integer.valueOf(st.nextToken());
+            pq.add(new Vertex(v1, v2, v3));
         }
 
         int answer = 0;
