@@ -67,6 +67,7 @@ public class Problem14442 {
 
         Map = new int[N][M];
 
+        
         for (int i = 0; i < N; i++) {
             String s = br.readLine();
             for (int j = 0; j < M; j++) {
