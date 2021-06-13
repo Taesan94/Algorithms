@@ -8,8 +8,7 @@ public class Problem15681 {
 
     static int N, R, Q;
     static List<Integer>[] Graph, Tree;
-    // Parent[adj] = p , adj의 부모는 p이다
-    static int[] Parent, Size;
+    static int[] Size;
 
     // 서브트리 갯수 세기
     static void count_subtree(int node) {
@@ -27,7 +26,6 @@ public class Problem15681 {
         for (int adj : Graph[node]) {
             // 부모와 연결 된 노드는 제외 시킴.
             if (adj != p) {
-                Parent[adj] = p;
                 Tree[node].add(adj);
                 make_tree(adj, node);
             }
@@ -45,7 +43,6 @@ public class Problem15681 {
 
         Graph = new List[N + 1];
         Tree = new List[N + 1];
-        Parent = new int[N + 1];
         Size = new int[N + 1];
 
         for (int i = 1; i <= N; i++) {
@@ -66,16 +63,16 @@ public class Problem15681 {
     public static void main(String[] args) throws Exception{
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuffer   sb = new StringBuffer("");
 
         // 1. 입력 및 양방향 그래프 생성.
         set_input(br);
         // 2. 트리 만들기
         make_tree(R, -1);
-
         // 3. 서브 트리 갯수 세기
         count_subtree(R);
 
-        StringBuffer sb = new StringBuffer("");
+        System.out.println(Arrays.toString(Size));
 
         for (int i = 0; i < Q; i++) {
            sb.append(Size[Integer.valueOf(br.readLine())]).append("\n");
