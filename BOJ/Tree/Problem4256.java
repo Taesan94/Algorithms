@@ -12,8 +12,12 @@ public class Problem4256 {
     static void postorder(int s, int e, int root) {
 
         for (int i = s; i < e; i++) {
+            // i는 중위순회에서, 좌측 트리를 순회한 횟수가 됨.
             if (PreOreder[root] == InOrder[i]) {
                 postorder(s, i, root + 1); // 좌
+                // + i는 현재 root에서 좌만큼이동한 거리
+                // - s는 범위의 시작부터.
+                // +1은 인덱스 계산 떄문에 ?
                 postorder(i + 1, e, root + i - s + 1); // 우
                 System.out.print(PreOreder[root] + " "); // 중
             }
