@@ -1,5 +1,7 @@
 package Programmers;
 
+import org.w3c.dom.Node;
+
 import java.util.*;
 
 class Temp {
@@ -74,6 +76,7 @@ class Temp {
         }
         return sb.toString();
     }
+    static Node ptr;
 
     static void node_back(int n) {
         for (int i = 0; i < n; i++) {
@@ -82,12 +85,26 @@ class Temp {
     }
 
     static void node_front(int n) {
+
+        //System.out.println("front n : " + n);
+        //System.out.println(ptr.toString());
+
+
         for (int i = 0; i < n; i++) {
             ptr = ptr.next;
         }
     }
 
-   static Node ptr;
+    static Node start;
+    static void print()
+    {
+        Node temp = start;
+        System.out.println("###  print ###");
+        while (temp != null) {
+            System.out.println(temp.toString());
+            temp = temp.next;
+        }
+    }
 
     public static String solution2(int n, int k, String[] cmd) {
 
@@ -95,7 +112,8 @@ class Temp {
         Stack<Node> stack = new Stack<>();
 
         Node prev = new Node(0, null, null);
-        Node ptr = prev;
+        start = prev;
+        ptr = prev;
 
         sb.append('O');
         for (int i = 1; i < n; i++) {
@@ -106,15 +124,16 @@ class Temp {
                 ptr = curr;
             prev = curr;
         }
-        System.out.println(ptr.toString());
+       // System.out.println(ptr.toString());
         for (String s : cmd) {
-            // System.out.printf("inst : %s, k : %d\n" ,s, k);
+            System.out.printf("inst : %s, k : %d\n" ,s, k);
 
             if (s.charAt(0) == 'U') {
-                node_front(atoi(s));
-            } else if (s.charAt(0) == 'D') {
                 node_back(atoi(s));
+            } else if (s.charAt(0) == 'D') {
+                node_front(atoi(s));
             } else if (s.charAt(0) == 'C') {
+                System.out.println("delete : " + ptr.toString());
                 stack.add(ptr);
                 if (ptr.prev != null)
                     ptr.prev.next = ptr.next;
@@ -128,8 +147,10 @@ class Temp {
                 if (data.next != null)
                     data.next.prev = data;
             }
+            print();
         }
         while (!stack.isEmpty()) {
+            System.out.println(stack.peek().data);
             sb.setCharAt(stack.pop().data, 'X');
         }
 
@@ -138,12 +159,21 @@ class Temp {
 
     public static void main(String[] args) {
         // String[] arr = {"C", "C", "D 1", "C", "Z", "C"};
-        String[] arr = {"C", "C", "C", "Z", "C"};
+//        String[] arr = {"C", "C", "C", "Z", "C"};
+//        System.out.println("s answer : " + solution(4, 3, arr));
+//        System.out.println("s2 answer : " + solution2(4, 3, arr));
+//
+//        String[] arr2 = {"C", "C", "Z"};
+//        System.out.println("s answer : " + solution(5, 3, arr2));
+//        System.out.println("s2 answer : " + solution2(5, 3, arr2));
+//
+//        String[] arr3 = {"D 1", "U 4"};
+//        System.out.println("s answer : " + solution(5, 3, arr3));
+//        System.out.println("s2 answer : " + solution2(5, 3, arr3));
 
-        System.out.println("answer : " + solution(4, 3, arr));
-
-        System.out.println("answer : " + solution2(4, 3, arr));
-
+        String[] arr4 = {"C", "C", "D 1", "C", "Z", "C"};
+        System.out.println("s answer : " + solution(4, 0, arr4));
+        System.out.println("s answer : " + solution2(4, 0, arr4));
         //        String[] arr2 = {"D 3", "C", "U 100" ,"C"};
         //        System.out.println("answer : " + solution(300000, 0, arr2));
     }
